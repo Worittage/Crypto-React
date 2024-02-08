@@ -62,15 +62,18 @@ const siderStyle = {
           <List
           size='small'
       dataSource={[
-        {title: 'Total Profit', value: asset.totalProfit},
-        {title: 'Asset Amount', value: asset.amount},
-        {title: 'Diference', value: asset.growPercent}
+        { title: 'Total Profit', value: asset.totalProfit},
+        { title: 'Asset Amount', value: asset.amount, isPlain: true },
+        { title: 'Diference', value: asset.growPercent}
       ]}
       renderItem={(item) => (
         <List.Item>
           <span>{item.title}</span>
-          <span>{item.value}</span>
 
+          {item.isPlain && <span>{item.value}</span>}
+  {!item.isPlain && typeof item.value === 'number' && (
+    <span>{item.value.toFixed(2)}$</span>
+  )}
         </List.Item>
       )}
     />
