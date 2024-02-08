@@ -48,37 +48,40 @@ const siderStyle = {
     return (
         <Layout.Sider width="25%" style={siderStyle}>
           {assets.map(asset => (
-            <Card key={asset.id} style={{ marginBottom: '1rem' }}>
-          <Statistic 
-            title={asset.id}
-            value={asset.totalAmount}
-            precision={2}
-            valueStyle={{
-              color: asset.grow ? '#3f8600' : '#cf1322',
-            }}
-            prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
-            suffix="$"
-          />
-          <List
-          size='small'
-      dataSource={[
-        { title: 'Total Profit', value: asset.totalProfit},
-        { title: 'Asset Amount', value: asset.amount, isPlain: true },
-        { title: 'Diference', value: asset.growPercent}
-      ]}
-      renderItem={(item) => (
-        <List.Item>
-          <span>{item.title}</span>
-
-          {item.isPlain && <span>{item.value}</span>}
-  {!item.isPlain && typeof item.value === 'number' && (
-    <span>{item.value.toFixed(2)}$</span>
-  )}
-        </List.Item>
-      )}
+  <Card key={asset.id} style={{ marginBottom: '1rem' }}>
+    <Statistic 
+      title={asset.id}
+      value={asset.totalAmount}
+      precision={2}
+      valueStyle={{
+        color: asset.grow ? '#3f8600' : '#cf1322',
+      }}
+      prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+      suffix="$"
     />
-          </Card>
-          ))}
+   <List
+  size='small'
+  dataSource={[
+    { title: 'Total Profit', value: asset.totalProfit, },
+    { title: 'Asset Amount', value: asset.amount, isPlain: true },
+    { title: 'Difference', value: asset.growPercent, isPlain: true }
+  ]}
+  renderItem={(item) => (
+    <List.Item>
+      <span>{item.title}</span>
+      {item.isPlain && <span>{item.value}</span>}
+      {!item.isPlain && typeof item.value === 'number' && !isNaN(item.value) && (
+        <Typography.Text type={asset.grow ? 'success' : 'danger'}>
+          {item.value.toFixed(2)}$
+        </Typography.Text>
+      )}
+    </List.Item>
+  )}
+/>
+
+  </Card>
+))}
+
           
 
           {/* <Card>
