@@ -8,13 +8,6 @@ const siderStyle = {
     padding: '1rem',
   };
 
-  const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-  ];
 
 
   export default function AppSider() {
@@ -68,10 +61,16 @@ const siderStyle = {
           />
           <List
           size='small'
-      dataSource={data}
+      dataSource={[
+        {title: 'Total Profit', value: asset.totalProfit},
+        {title: 'Asset Amount', value: asset.amount},
+        {title: 'Diference', value: asset.growPercent}
+      ]}
       renderItem={(item) => (
         <List.Item>
-          <Typography.Text mark>[ITEM]</Typography.Text> {item}
+          <span>{item.title}</span>
+          <span>{item.value}</span>
+
         </List.Item>
       )}
     />
