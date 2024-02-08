@@ -2,6 +2,7 @@ import { Layout, Card, Statistic, List, Typography, Spin } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { fakeFetchCrypto, fetchAssets } from '../../api';
+import { percentDifference } from '../../utils';
 
 const siderStyle = {
     padding: '1rem',
@@ -15,9 +16,6 @@ const siderStyle = {
     'Los Angeles battles huge wildfires.',
   ];
 
-  function percentDifference(a, b) {
-    return  100 * Math.abs( ( a - b ) / ( (a+b)/2 ) );
-  }
 
   export default function AppSider() {
     const [loading, setLoading] = useState(false)
@@ -56,16 +54,17 @@ const siderStyle = {
 
     return (
         <Layout.Sider width="25%" style={siderStyle}>
-          <Card style={{ marginBottom: '1rem' }}>
+          {assets.map(asset => (
+            <Card key={asset.id} style={{ marginBottom: '1rem' }}>
           <Statistic 
-            title="Active"
-            value={11.28}
+            title={asset.id}
+            value={asset.totalAmount}
             precision={2}
             valueStyle={{
-              color: '#3f8600',
+              color: asset.grow ? '#3f8600' : '#cf1322',
             }}
-            prefix={<ArrowUpOutlined />}
-            suffix="%"
+            prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
+            suffix="$"
           />
           <List
           size='small'
@@ -77,7 +76,10 @@ const siderStyle = {
       )}
     />
           </Card>
-          <Card>
+          ))}
+          
+
+          {/* <Card>
           <Statistic 
             title="Idle"
             value={9.3}
@@ -88,7 +90,8 @@ const siderStyle = {
             prefix={<ArrowDownOutlined />}
             suffix="%"
           />
-          </Card>
+          </Card> */}
+          
       </Layout.Sider>
     )
   }
