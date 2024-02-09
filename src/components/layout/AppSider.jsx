@@ -1,4 +1,4 @@
-import { Layout, Card, Statistic, List, Typography, Spin } from 'antd';
+import { Layout, Card, Statistic, List, Typography, Spin, Tag } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { fakeFetchCrypto, fetchAssets } from '../../api';
@@ -62,19 +62,26 @@ const siderStyle = {
    <List
   size='small'
   dataSource={[
-    { title: 'Total Profit', value: asset.totalProfit, },
+    { title: 'Total Profit', value: asset.totalProfit, widthTag: true, },
     { title: 'Asset Amount', value: asset.amount, isPlain: true },
-    { title: 'Difference', value: asset.growPercent, isPlain: true }
+    //{ title: 'Difference', value: asset.growPercent, isPlain: true }
   ]}
   renderItem={(item) => (
-    <List.Item>
+    <List.Item> 
       <span>{item.title}</span>
-      {item.isPlain && <span>{item.value}</span>}
+      <span>
+        {item.widthTag && (
+          <Tag color={asset.grow ? 'green' : 'red'}>{asset.growPercent}%</Tag>
+        )}
+
+
+      {item.isPlain && item.value}
       {!item.isPlain && typeof item.value === 'number' && !isNaN(item.value) && (
         <Typography.Text type={asset.grow ? 'success' : 'danger'}>
           {item.value.toFixed(2)}$
         </Typography.Text>
       )}
+      </span>
     </List.Item>
   )}
 />
