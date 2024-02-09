@@ -2,7 +2,7 @@ import { Layout, Card, Statistic, List, Typography, Spin, Tag } from 'antd';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { fakeFetchCrypto, fetchAssets } from '../../api';
-import { percentDifference } from '../../utils';
+import { capitalize, percentDifference } from '../../utils';
 
 const siderStyle = {
     padding: '1rem',
@@ -50,7 +50,7 @@ const siderStyle = {
           {assets.map(asset => (
   <Card key={asset.id} style={{ marginBottom: '1rem' }}>
     <Statistic 
-      title={asset.id}
+      title={capitalize(asset.id)}
       value={asset.totalAmount}
       precision={2}
       valueStyle={{
@@ -67,7 +67,7 @@ const siderStyle = {
     //{ title: 'Difference', value: asset.growPercent, isPlain: true }
   ]}
   renderItem={(item) => (
-    <List.Item> 
+    <List.Item > 
       <span>{item.title}</span>
       <span>
         {item.widthTag && (
@@ -89,21 +89,6 @@ const siderStyle = {
   </Card>
 ))}
 
-          
-
-          {/* <Card>
-          <Statistic 
-            title="Idle"
-            value={9.3}
-            precision={2}
-            valueStyle={{
-              color: '#cf1322',
-            }}
-            prefix={<ArrowDownOutlined />}
-            suffix="%"
-          />
-          </Card> */}
-          
       </Layout.Sider>
     )
   }
