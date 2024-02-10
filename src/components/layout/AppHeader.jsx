@@ -1,4 +1,4 @@
-import { Layout, Select, Space } from 'antd';
+import { Layout, Select, Space, Button } from 'antd';
 
 const headerStyle = {
   width: '100%',
@@ -6,7 +6,6 @@ const headerStyle = {
     height: 60,
     padding: '1rem',
     display: 'flex',
-    background: '#fff',
     justifyContent: 'space-between',
     alignItems: 'center',
   };
@@ -45,9 +44,8 @@ export default function AppHeader() {
     return (
     <Layout.Header style={headerStyle}>
        <Select
-    mode="multiple"
     style={{
-      width: '100%',
+      width: 250,
     }}
     placeholder="select one country"
     defaultValue={['china']}
@@ -63,6 +61,8 @@ export default function AppHeader() {
       </Space>
     )}
   />
+
+  <Button type="primary" >Add Asset</Button>
     </Layout.Header>
 
     )
