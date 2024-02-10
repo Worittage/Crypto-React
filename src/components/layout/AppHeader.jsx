@@ -1,5 +1,5 @@
 import { Layout, Select, Space, Button } from 'antd';
-
+import { useCrypto } from '../../context/crypto-context'; 
 const headerStyle = {
   width: '100%',
     textAlign: 'center',
@@ -13,7 +13,7 @@ const headerStyle = {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
-  const options = [
+ /*const options = [
     {
       label: 'China',
       value: 'china',
@@ -38,26 +38,27 @@ const headerStyle = {
       emoji: '🇰🇷',
       desc: 'Korea (韩国)',
     },
-  ];
+  ]; */
 
 export default function AppHeader() {
+  const { crypto } = useCrypto()
     return (
     <Layout.Header style={headerStyle}>
        <Select
     style={{
       width: 250,
     }}
-    placeholder="select one country"
-    defaultValue={['china']}
+    value="press / to open"
     onChange={handleChange}
     optionLabelProp="label"
-    options={options}
+    options={crypto.map(coin => ({
+      label: coin.name,
+      value: coin.id,
+      icon: coin.icon,
+    }))}
     optionRender={(option) => (
       <Space>
-        <span role="img" aria-label={option.data.label}>
-          {option.data.emoji}
-        </span>
-        {option.data.desc}
+        <img src={option.data.icon} alt={option.data.label} /> {option.data.label}
       </Space>
     )}
   />
