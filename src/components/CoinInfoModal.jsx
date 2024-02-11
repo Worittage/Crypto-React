@@ -38,10 +38,12 @@ export default function CoinInfoModal({ coin }) {
         <Typography.Text strong>Market Cap: </Typography.Text>
         {coin.marketCap}$
     </Typography.Paragraph>
+    {coin.contractAdress && (
     <Typography.Paragraph>
         <Typography.Text strong>Contract Adress: </Typography.Text>
-        {coin.price}
+        {coin.contractAdress}
     </Typography.Paragraph>
+    )}
     </>
     )
 }
