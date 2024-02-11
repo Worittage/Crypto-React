@@ -26,7 +26,22 @@ export default function CoinInfoModal({ coin }) {
             {coin.priceChange1h}%
         </Tag>
     </Typography.Paragraph>
+    <Typography.Paragraph>
+        <Typography.Text strong>Price: </Typography.Text>
+        {coin.price.toFixed(2)}$
+    </Typography.Paragraph>
+    <Typography.Paragraph>
+        <Typography.Text strong>Price BTC: </Typography.Text>
+        {coin.priceBtc}
+    </Typography.Paragraph>
+    <Typography.Paragraph>
+        <Typography.Text strong>Market Cap: </Typography.Text>
+        {coin.marketCap}$
+    </Typography.Paragraph>
+    <Typography.Paragraph>
+        <Typography.Text strong>Contract Adress: </Typography.Text>
+        {coin.price}
+    </Typography.Paragraph>
     </>
-
     )
 }
